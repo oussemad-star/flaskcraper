@@ -1,11 +1,10 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 from bs4 import BeautifulSoup
 import requests
 from urllib.parse import urlparse
 
 app = Flask(__name__)
-CORS(app)
+
 @app.route('/')
 def hello():
     return "✅ Flask Article Extractor is Running!"
