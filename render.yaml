@@ -4,4 +4,8 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python main.py
+    # Updated startCommand to use Gunicorn to serve the Flask app from main.py
+    # 'main:app' refers to the 'app' Flask instance within the 'main.py' file.
+    startCommand: python -m gunicorn --workers 4 --bind 0.0.0.0:$PORT main:app
+    # The port is automatically set by Render via the $PORT environment variable.
+    # Ensure your Flask app listens on 0.0.0.0:$PORT (Flask's default is 5000, but Gunicorn handles this).
